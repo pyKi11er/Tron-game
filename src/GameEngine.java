@@ -1,4 +1,4 @@
-package src;
+
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -26,7 +26,7 @@ public class GameEngine extends JPanel{
     private final int MOTOR_WIDTH = 10;
     private final int MOTOR_HEIGHT = 10;
     private final int MOTOR_SPEED = 2;       
-    
+    private int gameFrames;
     private boolean paused = false;
     private Image background;
     private Image p1Image;
@@ -154,6 +154,7 @@ public class GameEngine extends JPanel{
     
     public void restart() {
         traces = new ArrayList<>();
+        gameFrames = 0;
         player1 = new Motor(100, 300, MOTOR_WIDTH, MOTOR_HEIGHT, p1Image, p1Color);
         player1.setVelx(MOTOR_SPEED);
         player1.setVely(0);
@@ -201,6 +202,14 @@ public class GameEngine extends JPanel{
         
         player1.draw(grphcs);
         player2.draw(grphcs);
+        int totalSeconds = gameFrames / FPS;
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+        String timeString = String.format("%02d:%02d", minutes, seconds);
+        grphcs.setColor(Color.WHITE);
+        grphcs.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
+        int textWidth = grphcs.getFontMetrics().stringWidth(timeString);
+        grphcs.drawString(timeString, (800-textWidth) / 2, 30);
     }
 
     class NewFrameListener implements ActionListener {
@@ -208,6 +217,7 @@ public class GameEngine extends JPanel{
         @Override
         public void actionPerformed(ActionEvent ae) {
             if (!paused) {
+                gameFrames++;
                 player1.move();
                 player2.move();
                 if (checkWallCollision(player1)) {
