@@ -5,7 +5,10 @@ import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.*;
-
+/**
+ *
+ * @author Hayk-PC
+ */
 public class TronGUI extends JFrame{
     private GameEngine gameArea;
     
@@ -72,4 +75,3 @@ public class TronGUI extends JFrame{
         }
     }
 }
-

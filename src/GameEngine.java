@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  * @author Hayk-PC
  */
 public class GameEngine extends JPanel{
-    private final int FPS = 240;
+    private final int FPS = 60;
     private final int MOTOR_WIDTH = 10;
     private final int MOTOR_HEIGHT = 10;
     private final int MOTOR_SPEED = 2;       
@@ -47,8 +47,8 @@ public class GameEngine extends JPanel{
 
         
         background = new ImageIcon("data/images/background.jpg").getImage();
-        p1Image = new ImageIcon("data/images/car1.png").getImage(); 
-        p2Image = new ImageIcon("data/images/car2.png").getImage();
+        p1Image = new ImageIcon("data/images/moto.png").getImage(); 
+        p2Image = new ImageIcon("data/images/moto.png").getImage();
         
         
         this.getInputMap().put(KeyStroke.getKeyStroke("A"), "p1_left");
