@@ -35,11 +35,15 @@ public class GameEngine extends JPanel{
     private Motor player2;
     private Timer newFrameTimer;
     private List<Trace> traces;
+    private String p1Name, p2Name;
+    private Color p1Color, p2Color;
     
-    
-    public GameEngine() {
+    public GameEngine(String p1Name, Color p1Color, String p2Name, Color p2Color) {
         super();
-        restart();
+        this.p1Name = p1Name;
+        this.p1Color = p1Color;
+        this.p2Name = p2Name;
+        this.p2Color = p2Color;
 
         this.getInputMap().put(KeyStroke.getKeyStroke("A"), "p1_left");
         this.getActionMap().put("p1_left", new AbstractAction() {
@@ -144,10 +148,10 @@ public class GameEngine extends JPanel{
     
     public void restart() {
         traces = new ArrayList<>();
-        player1 = new Motor(100, 300, MOTOR_WIDTH, MOTOR_HEIGHT, p1Image, Color.RED);
+        player1 = new Motor(100, 300, MOTOR_WIDTH, MOTOR_HEIGHT, p1Image, p1Color);
         player1.setVelx(MOTOR_SPEED);
         player1.setVely(0);
-        player2 = new Motor(700, 300, MOTOR_WIDTH, MOTOR_HEIGHT, p2Image, Color.BLUE);
+        player2 = new Motor(700, 300, MOTOR_WIDTH, MOTOR_HEIGHT, p2Image, p2Color);
         player2.setVelx(-MOTOR_SPEED);
         player2.setVely(0);
         
