@@ -45,6 +45,12 @@ public class GameEngine extends JPanel{
         this.p2Name = p2Name;
         this.p2Color = p2Color;
 
+        
+        background = new ImageIcon("data/images/background.jpg").getImage();
+        p1Image = new ImageIcon("data/images/car1.png").getImage(); 
+        p2Image = new ImageIcon("data/images/car2.png").getImage();
+        
+        
         this.getInputMap().put(KeyStroke.getKeyStroke("A"), "p1_left");
         this.getActionMap().put("p1_left", new AbstractAction() {
             @Override
@@ -156,6 +162,10 @@ public class GameEngine extends JPanel{
         player2.setVely(0);
         
         paused = false;
+        
+        if (newFrameTimer != null) {
+            newFrameTimer.start();
+        }
     }
     
             
@@ -201,11 +211,11 @@ public class GameEngine extends JPanel{
                 player1.move();
                 player2.move();
                 if (checkWallCollision(player1)) {
-                    gameOver("Player 2 wins");
+                    gameOver(p2Name);
                     return;
                 }
                 if (checkWallCollision(player2)) {
-                    gameOver("Player 1 wins");
+                    gameOver(p1Name);
                     return;
                 }
                 
@@ -214,17 +224,19 @@ public class GameEngine extends JPanel{
                     Trace t = traces.get(i);
                     
                     if(player1.collides(t)){
-                        gameOver("Player 2");
+                        gameOver(p2Name);
                         return;
                     }
                     if(player2.collides(t)){
-                        gameOver("Player 1");
+                        gameOver(p1Name);
                         return;
                     }
                 }
                 
                 if(player1.collides(player2)){
-                    gameOver("Friendship");
+                    newFrameTimer.stop();
+                    JOptionPane.showMessageDialog(GameEngine.this, "Head on collision! It's a Draw.");
+                    restart();
                     return;
                 }
                 
