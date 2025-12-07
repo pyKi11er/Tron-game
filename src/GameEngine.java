@@ -219,7 +219,7 @@ public class GameEngine extends JPanel{
                     return;
                 }
                 
-                int safeZone = 10;
+                int safeZone = 30;
                 for(int i = 0; i<traces.size() - safeZone; i++){
                     Trace t = traces.get(i);
                     
